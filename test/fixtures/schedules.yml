@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  trip_date: 2023-07-11
+  bus: one
+  available_seat: MyString
+
+two:
+  trip_date: 2023-07-11
+  bus: two
+  available_seat: MyString

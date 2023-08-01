@@ -1,0 +1,49 @@
+<div class="modal-header">
+  <h4 class="modal-title text-center" id="myModalLabel">
+    <i class="fa fa-user-circle" aria-hidden="true"></i>
+    Driver Details
+  </h4>
+  <span type="button" class="close" style="font-size: 25px;" data-dismiss="modal">x</span>
+</div>
+<%= form_for [@bus, @driver] do |f|%>
+  <div class="modal-body m-3">
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %></br>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :age %>
+      <%= f.number_field :age, class: 'form-control' %></br>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :contact_no %>
+      <%= f.number_field :contact_no, class: 'form-control' %></br>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :license %>
+      <%= f.text_field :license, class: 'form-control' %></br>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :image %>
+      <%= f.file_field :image, class: 'form-control' %></br>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <%= f.submit "save", class:"btn btn-primary"%>
+  </div>
+<%end%>
+
+<script type="text/javascript">
+  $(".close").click(function(){
+    $("#bus-driver-<%= @bus.id%>").hide()
+  });
+</script>
+<style>
+  #myModalLabel{
+      min-width: 450px;
+  }
+</style>

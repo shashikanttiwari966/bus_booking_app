@@ -1,0 +1,46 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="myModalLabel">Add Bus Details</h4>
+  <span type="button" class="close" style="font-size: 25px;" data-dismiss="modal">x</span>
+</div>
+<%= form_for @bus do |f|%>
+  <div class="modal-body m-3">
+    <div class="form-group mb-3">
+      <%= f.label :bus_number %><br />
+      <%= f.text_field :bus_number, autofocus: true, class: 'form-control' %>
+    </div>
+    <div class="form-group mb-3">
+      <%= f.label :bus_name %><br />
+      <%= f.text_field :bus_name, autofocus: true, class: 'form-control' %>
+    </div>
+    <div class="form-group mb-3">
+      <%= f.label :total_seat %><br />
+      <%= f.text_field :total_seat, autofocus: true, class: 'form-control' %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= f.label :image %><br />
+      <%= f.file_field :image, class: 'form-control' %>
+    </div>
+
+    <div class="bus-trip">
+      <fieldset>
+        <legend>Bus Trip</legend>
+        <div class="bus_trips">
+          <%= f.fields_for :bus_trips do |bus_trip| %>
+            <%= render 'bus_trip_fields', f: bus_trip %>
+          <% end %>
+        </div>
+        <%= link_to_add_association "Add Trip", f, :bus_trips, data: {association_insertion_node: '.bus_trips', association_insertion_method: :append} %>
+      </fieldset>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <%= f.submit "save", class:"btn btn-primary"%>
+  </div>
+<%end%>
+
+<script type="text/javascript">
+  $(".close").click(function(){
+    $("#modal-window").hide()
+  });
+</script>

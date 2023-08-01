@@ -1,0 +1,105 @@
+<div id="map"></div>
+<div class="p-2">
+  <%= form_tag("/", :method => "get", class:"form-inline d-flex") do %>
+    <!-- <div class="form-group mb-2 w-25">
+      <%#= date_field_tag :date_of_tour,'', class: "form-control" %>
+    </div> -->
+
+    <div class="form-group mx-sm-3 mb-2 w-25">
+      <%#= search_field_tag :buse_name, '',class: "form-control", placeholder:"Search your bus" %>
+      <%= text_field_tag :search,'',placeholder:"Search your bus",class: "form-control mr-2" %>
+    </div>
+
+    <!-- <div class="form-group mx-sm-3 mb-2 w-25">
+      <%#= select_tag :category, options_from_collection_for_select(Seat.seat_types, :second, :first),class: "form-control", placeholder:"Search your bus" %>
+    </div> -->
+
+    <%= submit_tag "Search", class:"btn btn-outline-success mx-sm-3 mb-2" %>
+  <%end%>
+</div>
+
+
+<%@buses.each do |bus| %>
+  <div class="card m-5">
+    <div class="card-body">
+      <div class="card-left w-50">
+        <%= image_tag bus.image%>
+      </div>
+      <div class="card-right w-50 p-5">
+        <h5 class="card-title text-primary"><%= bus.bus_name%> <small>(<%= bus.bus_number%>)</small></h5>
+        <% if bus.bus_service.present?%>
+          <div class="row mt-4">
+            <%= raw get_bus_services(bus.bus_service)%>
+          </div>
+        <%end%>
+        <div class="row mt-3">
+          <div class="col-sm-6">
+            <i class="fa fa-inr" aria-hidden="true"></i> Price: <span>2,000</span>
+          </div>
+          <div class="col-sm-6">
+            <i class='fas fa-chair'></i> Seat: <span> <%= bus.total_seat%>seat</span>
+          </div>
+        </div>
+        <% bus.bus_trips.each do |trip|%>
+          <div class="row mt-3">
+            <div class="col-sm-6">
+              <i class='fa-solid fa-clock'></i>
+              Departure: <span> <%= trip.departure.strftime("%H:%M")%></span>
+            </div>
+            <div class="col-sm-6">
+             <i class="fa fa-road" aria-hidden="true"></i>
+             Route: <span><%= show_trip_location(trip)%></span>
+            </div>
+          </div>
+        <%end%>
+        <%= link_to "Book Now", seats_show_path(id: 1, bus_id: bus.id), class:"btn btn-primary mt-5"%>
+      </div>
+    </div>
+  </div>
+<%end%>
+
+<style>
+
+  #map {
+  height: 100%;
+}
+  .card-left{
+    float: left;
+  }
+
+  .card-right{
+    float: right;
+  }
+  span{
+    color: gray;
+    padding: 0px 22px;
+  }
+  img{
+    height: 270px !important;
+  }
+  @media (max-width: 576px) {
+    /* Customize mobile-specific styles here */
+    .card-left > img{
+      height: 90px !important;
+    }
+    .p-5 {
+      padding: 0.2em !important;
+    }
+    .card-right > .mt-4{
+      display: inline;
+    }
+    .card-right > .mt-4 > .col-sm-2{
+      display: inline;
+    }
+
+    .card-title {
+      font-size: 15px;
+    }
+    .row, .btn{
+      font-size: 11px;
+    }
+    .mt-5 {
+      margin-top: 1rem !important;
+    }
+  }
+</style>

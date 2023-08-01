@@ -1,0 +1,11 @@
+<%= link_to "Show", bus_path(bus), class:"action btn btn-primary" %>
+<%= link_to "Edit", edit_bus_path(bus), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class:"action btn btn-success" }%>
+<%= link_to "Delete", bus_path(bus), class:"action btn btn-danger" %>
+
+<%= link_to new_bus_driver_path(bus),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => "#bus-driver-#{bus.id}", class:"action btn btn-secondary"} do%>
+<i class="fa fa-id-badge" aria-hidden="true"></i> Driver
+<%end%>
+
+<%= link_to bus.bus_service.present? ? edit_bus_bus_service_url(bus.bus_service, bus_id: bus.id) : new_bus_bus_service_path(bus),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => "#bus-service-#{bus.id}", class:"action btn btn-secondary"} do%>
+<i class="fa fa-cog" aria-hidden="true"></i> Services
+<%end%>

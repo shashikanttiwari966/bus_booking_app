@@ -1,0 +1,25 @@
+<%= turbo_frame_tag "seat_name_#{@seat.id}" do %> 
+  <%= form_with model: @seat, url: seat_path(@seat) do |form| %> 
+    <%= form.text_field :name, class: "form-control", onchange:"this.form.submit()", :'data-remote' => 'true', :'data-type' => 'script'%>
+    <%#= form.submit "Save" %> 
+  <% end %> 
+<% end %>
+<%= turbo_frame_tag "seat_type_#{@seat.id}" do %> 
+  <%= form_with model: @seat, url: seat_path(@seat), local: false, remote: true do |form| %> 
+    <div><%= form.collection_select :seat_type, Seat.seat_types, :first, :first, {class: "form-control", onchange:"this.form.submit()"} %>
+    </div>
+  <% end %> 
+<% end %>
+
+<script type="text/javascript">
+  function onChangeAction(){
+     $.ajax({
+      dataType: "script",
+      type: "PATCH",
+      url: "/seats/:id"+bus_id,
+      data: { 
+        schedule_id: schedule_id         
+      }
+    });
+  }
+</script>

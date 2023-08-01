@@ -1,0 +1,18 @@
+<div class="nested-fields">
+  <div class="form-group mb-3">
+    <%= f.label :pickup_location, class: "mt-3" %>
+    <%= f.collection_select :pickup_location, CS.cities(current_user.service_state.to_sym, :in), :itself, :itself, { prompt: "Select a pickup location" },class: 'mb-3 form-control'%>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= f.label :destination_location, class: "mt-3" %>
+    <%= f.collection_select :destination_location, CS.cities(current_user.service_state.to_sym, :in), :itself, :itself, { prompt: "Select a pickup location" },class: 'mb-3 form-control'%>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= f.label :departure, class: "mt-3" %>
+    <%= f.time_field :departure, class: 'mb-3 form-control'%>
+  </div>
+
+  <%= link_to_remove_association "Delete", f %>
+</div>

@@ -1,0 +1,15 @@
+<h5 class="text-center mb-5">Edit Bus Seat</h5>
+<% @bus.seats.each do |seat|%>
+  <div class="row">
+    <div class="col-sm-6">
+      <%= turbo_frame_tag "seat_name_#{seat.id}" do %>   
+        <%= link_to seat.name, edit_seats_path(seat) %> 
+      <% end %>
+    </div>
+    <div class="col-sm-6">
+      <%= turbo_frame_tag "seat_type_#{seat.id}" do %>   
+        <%= link_to seat.seat_type, edit_seats_path(seat) %> 
+      <% end %>
+    </div>
+  </div>
+<%end%>

@@ -1,0 +1,6 @@
+var schedule  = document.getElementById('schedule_id')
+schedule  = schedule.options[schedule.selectedIndex]
+schedule.setAttribute('selected',true)
+$('#booking_block').html("<%= j ( render 'booking' )%>")
+var selected_data  = document.getElementById('schedule_id')
+selected_data.options[selected_data.selectedIndex] = schedule

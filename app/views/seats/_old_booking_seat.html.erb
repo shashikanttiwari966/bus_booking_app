@@ -1,0 +1,151 @@
+<%= form_for @booking, url: booking_seats_path(@booking), method: :post do |f|%>
+  <%= f.hidden_field :bus_id, value: @bus.id%>
+  <%= f.hidden_field :schedule_id, value: @schedule.id%>
+<!-- select seat -->
+  <div id="select-seat step-2" class="form-step d-none">
+    <div class="m-3 text-success text-center">
+      <h5 id="date-of-journey m-2 text-success">
+        Date of journey: <%= @schedule.trip_date.strftime("%d %h %Y")%>   
+      </h5>
+    </div>
+    <div class="select-seat-left">
+      <h5 class="text-center">Available Seat</h5>
+      <div class="fuselage">
+        
+      </div>
+      <ol class="cabin fuselage">
+        <li class="p-2 driver-seat">
+          <img src="https://james-muriithi.github.io/bus/images/driver.png">
+        </li>
+          <% index = 0%>
+          <% @bus.seats.each_slice(5) do |seats|%>
+              <li class="row row--<%= index += 1%>">
+                <ol class="seats" type="A">
+                  <% seats.each do |seat|%>
+                    <li class="seat">
+                      <%= check_box_tag("seats[]", seat.name,false, {id:"#{seat.name}", onclick:"selectSeat(#{seat.name})", disabled: @seat_name.include?(seat.name) ? true: false}) %>
+                      <label for="<%= seat.name%>"><%= seat.name%></label>
+                    </li>
+                  <%end%>
+                </ol>
+              </li>
+          <%end%>
+      </ol>
+      <div class="fuselage">
+        
+      </div>
+    </div>
+    <div class="clearfix" id="bus-seat-<%= @bus.id%>">
+      <div class="select-seat-right row">
+        <h5 class="text-center">Booking seat </h5>
+        <div class="seat-details"></div>
+      </div>
+    </div>
+    <div class="m-3">
+      <!-- <button onclick="continueStep()" type="button" class="btn btn-success continue-step">continue</button> -->
+      <button class="button btn-navigate-form-step" type="button" step_number="1">Prev</button>
+      <button class="button btn-navigate-form-step" type="button" step_number="3">Next</button>
+    </div>
+  </div>
+
+<!-- add passenger -->
+  <div class="passenger-section form-step d-none" id="select-passenger step-3">
+    <div class="passengers">   
+      <%= f.fields_for :passengers do |passenger| %>
+        <%= render 'passenger_fields', f: passenger %>
+      <% end %>
+    </div>
+    <%= link_to_add_association "Add Passenger", f, :passengers, data: {association_insertion_node: '.passengers', association_insertion_method: :append} %>
+    <button class="button btn-navigate-form-step" type="button" step_number="2">Prev</button>
+    <%= f.submit 'save', class:"button submit-btn"%>
+  </div>
+<%end%>
+
+<style type="text/css">
+
+  li > a{
+    text-decoration: none !important;
+  }
+
+  #select-seat{
+    display: none;
+    margin: 25px 210px;
+    background: white;
+    padding: 35px;
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+  }
+  #select-passenger{
+    display: none;
+  }
+
+  .select-seat-left{
+    float: left;
+    width: 45%;
+  }
+
+  .select-seat-right{
+    float: right;
+    width: 55%;
+  }
+
+  .clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/*.booking-section{
+  display: none;
+}
+*/
+#select-city, #select-passenger{
+  margin: 47px 420px;
+  max-width: 35%;
+  border: 1px solid gainsboro;
+  background: white;
+  padding: 18px;
+  border-radius: 10px;
+}
+
+.next-step{
+  margin-left: 350px;
+  }
+
+.continue-step{
+  float: right;
+}
+</style>
+
+<script type="text/javascript">
+
+  function selectSeat(params) {
+    var checkBox = document.getElementById(params.id)
+    if (checkBox.checked == true){
+      $(".seat-details").append("<div id="+'seat-name-'+params.id+" class='border seat-name '>Economy Class Seat #"+params.id+": Ksh 3000 <button class='btn btn-danger close' onclick='unCheckSeat("+params.id+")' data-id="+params.id+">delete</button></div>")
+    } 
+    else {
+      $('#seat-name-'+params.id).remove()
+    }
+  }
+
+  //remove and unckecked seat through button
+  function unCheckSeat(params) {
+    var checkBox = document.getElementById(params.id)
+    checkBox.checked = false
+    $('#seat-name-'+params.id).remove()
+  }
+
+  function nextStep() {
+    $('#select-city').hide()
+    $('#select-seat').show()
+    return false;
+  }
+
+  function continueStep() {
+    $('#select-city').hide()
+    $('#select-seat').hide()
+    $('#select-passenger').show()
+    return false;
+  }
+</script>

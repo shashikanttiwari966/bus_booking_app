@@ -1,0 +1,60 @@
+<form id="multi-step-form">
+  <fieldset>
+    <h2>Step 1</h2>
+    <input type="text" placeholder="First Name" required>
+    <input type="text" placeholder="Last Name" required>
+    <button onclick="nextStep(event)">Next</button>
+  </fieldset>
+
+  <fieldset>
+    <h2>Step 2</h2>
+    <input type="email" placeholder="Email" required>
+    <input type="tel" placeholder="Phone" required>
+    <button onclick="prevStep(event)">Previous</button>
+    <button onclick="nextStep(event)">Next</button>
+  </fieldset>
+
+  <fieldset>
+    <h2>Step 3</h2>
+    <input type="text" placeholder="Address" required>
+    <input type="text" placeholder="City" required>
+    <button onclick="prevStep(event)">Previous</button>
+    <button type="submit">Submit</button>
+  </fieldset>
+</form>
+
+<style type="text/css">
+  fieldset {
+  display: none;
+}
+
+fieldset:first-child {
+  display: block;
+}
+
+button {
+  margin-top: 10px;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+</style>
+
+<script type="text/javascript">
+  function nextStep(event) {
+  event.preventDefault();
+  const currentFieldset = event.target.parentElement;
+  const nextFieldset = currentFieldset.nextElementSibling;
+  currentFieldset.style.display = 'none';
+  nextFieldset.style.display = 'block';
+}
+
+function prevStep(event) {
+  event.preventDefault();
+  const currentFieldset = event.target.parentElement;
+  const prevFieldset = currentFieldset.previousElementSibling;
+  currentFieldset.style.display = 'none';
+  prevFieldset.style.display = 'block';
+}
+</script>

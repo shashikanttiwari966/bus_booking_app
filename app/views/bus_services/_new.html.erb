@@ -1,0 +1,49 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="myModalLabel">Bus Services Details</h4>
+  <span type="button" class="close" style="font-size: 25px;" data-dismiss="modal">x</span>
+</div>
+<%= form_for [@bus, @bus_service] do |f|%>
+  <div class="modal-body m-3">
+    <div class="row">
+      <div class="col-sm-4 mb-3">
+        <%= f.check_box :ac, class: 'form-check-input' %>
+        <%= f.label :ac %>
+      </div>
+      <div class="col-sm-4 mb-3">
+        <%= f.check_box :tv, class: 'form-check-input' %>
+        <%= f.label :tv %>
+      </div>
+      <div class="col-sm-4 mb-3">
+        <%= f.check_box :washroom, class: 'form-check-input' %>
+        <%= f.label :washroom %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-4 mb-3">
+        <%= f.check_box :wifi, class: 'form-check-input' %>
+        <%= f.label :wifi %>
+      </div>
+
+      <div class="col-sm-4 mb-3">
+        <%= f.check_box :blanket, class: 'form-check-input' %>
+        <%= f.label :blanket %>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <%= f.submit "save", class:"btn btn-primary"%>
+  </div>
+<%end%>
+
+<script type="text/javascript">
+  $(".close").click(function(){
+    $("#bus-service-<%= @bus.id%>").hide()
+  });
+</script>
+
+<style type="text/css">
+  #myModalLabel{
+    margin-left: 124px;
+  }
+</style>

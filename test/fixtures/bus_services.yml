@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bus: one
+  ac: false
+  tv: false
+  washroom: false
+  wifi: false
+  food: false
+  blanket: false
+
+two:
+  bus: two
+  ac: false
+  tv: false
+  washroom: false
+  wifi: false
+  food: false
+  blanket: false

@@ -1,0 +1,25 @@
+<h5 class="text-center">Available Seat</h5>
+<div class="fuselage">
+  
+</div>
+<ol class="cabin fuselage">
+  <li class="p-2 driver-seat">
+    <img src="https://james-muriithi.github.io/bus/images/driver.png">
+  </li>
+    <% index = 0%>
+    <% @bus.seats.each_slice(5) do |seats|%>
+        <li class="row row--<%= index += 1%>">
+          <ol class="seats" type="A">
+            <% seats.each do |seat|%>
+              <li class="seat">
+                <%= check_box_tag("seats[]", seat.name,false, {id:"#{seat.name}", onclick:"selectSeat(#{seat.name})", disabled: @seat_name.include?(seat.name) ? true: false}) %>
+                <label for="<%= seat.name%>"><%= seat.name%></label>
+              </li>
+            <%end%>
+          </ol>
+        </li>
+    <%end%>
+</ol>
+<div class="fuselage">
+  
+</div>

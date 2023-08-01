@@ -1,0 +1,52 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "bootstrap";
+@import "font-awesome";
+@import "show_seats";
+
+body{
+  background: #f1ebeb9e;
+}
+
+.card{
+  box-shadow: 0px 0px 10px gray;
+}
+
+.navbar-title{
+  border-right: 2px solid black;
+  padding: 0px 7px;
+}
+
+.add-bus{
+  border-style: dashed !important;
+  border: #c5c5c585;
+}
+
+.modal-content{
+  box-shadow: 0px 0px 10px gray;
+  border-color: white;
+}
+
+.action{
+  padding: 2px 10px;
+}
+
+.alert-success{
+  width: auto;
+  position: absolute;
+  top: 60px;
+  z-index: 99;
+}

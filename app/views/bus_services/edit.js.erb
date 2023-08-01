@@ -1,0 +1,5 @@
+$("#bus-service-<%= @bus.id%>").find(".modal-content").html("<%= j (render 'bus_services/new') %>");
+// $("#modal-window").modal();
+$("#bus-service-<%= @bus.id%>").removeClass('hide');
+$("#bus-service-<%= @bus.id%>").show();
+$("#bus-service-<%= @bus.id%>").addClass('show');
